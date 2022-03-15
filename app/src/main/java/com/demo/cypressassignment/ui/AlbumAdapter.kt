@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.demo.cypressassignment.utils.BothSideScroll
 import com.demo.cypressassignment.R
 import com.demo.cypressassignment.databinding.RowAlbumListBinding
 import com.demo.cypressassignment.model.AlbumDetailDto
@@ -44,11 +45,12 @@ class AlbumAdapter :
         val adapter = PhotoAdapter()
         val layoutManager =
             LinearLayoutManager(holder.itemView.context, LinearLayoutManager.HORIZONTAL, false)
-        //layoutManager.initialPrefetchItemCount = 10
         holder.binding.rvImage.layoutManager = layoutManager
         holder.binding.rvImage.setHasFixedSize(true)
 
-        holder.binding.rvImage.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        holder.binding.rvImage.addOnScrollListener(BothSideScroll(layoutManager, data.list?.size!!))
+
+        /*holder.binding.rvImage.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val firstItemVisible: Int = layoutManager.findFirstVisibleItemPosition()
@@ -63,7 +65,7 @@ class AlbumAdapter :
                     )
                 }
             }
-        })
+        })*/
 
         holder.binding.rvImage.setRecycledViewPool(viewPool)
         holder.binding.rvImage.adapter = adapter

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.demo.cypressassignment.R
 import com.demo.cypressassignment.databinding.ActivityMainBinding
+import com.demo.cypressassignment.utils.BothSideScroll
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -45,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
             rvAlbum.addItemDecoration(mDividerItemDecoration)
 
-            rvAlbum.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            /*rvAlbum.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
                     val firstItemVisible: Int = layoutManager.findFirstVisibleItemPosition()
@@ -62,12 +63,13 @@ class MainActivity : AppCompatActivity() {
                         )
                     }
                 }
-            })
+            })*/
 
             rvAlbum.adapter = adapter
 
             this@MainActivity.viewmodel.album.observe(this@MainActivity) { response ->
                 adapter.submitList(response)
+                binding.rvAlbum.addOnScrollListener(BothSideScroll(layoutManager, adapter.currentList.size))
             }
         }
     }
