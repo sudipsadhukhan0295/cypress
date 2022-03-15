@@ -1,0 +1,75 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+def version = rootProject.ext
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.demo.cypressassignment"
+        minSdk 23
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+}
+
+dependencies {
+
+
+    implementation "androidx.appcompat:appcompat:$version.appCompactVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$version.constrainLayoutVersion"
+    implementation "com.google.android.material:material:$version.materialVersion"
+
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$version.archLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$version.archLifecycleVersion"
+
+    implementation "androidx.activity:activity-ktx:$version.activityVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version.coroutineVersion"
+
+    implementation "com.google.dagger:hilt-android:$version.hiltVersion"
+    implementation 'androidx.asynclayoutinflater:asynclayoutinflater:1.0.0'
+    kapt "com.google.dagger:hilt-compiler:$version.hiltVersion"
+
+    implementation "io.coil-kt:coil:$version.coilVersion"
+
+    implementation "com.google.code.gson:gson:$version.gsonVersion"
+
+    implementation "androidx.room:room-ktx:$version.roomVersion"
+    kapt "androidx.room:room-compiler:$version.roomVersion"
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$version.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$version.retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$version.loggingInspectorVersion"
+
+    //testImplementation 'junit:junit:4.12'
+    //androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    //androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
